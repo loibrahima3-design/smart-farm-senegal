@@ -1,0 +1,47 @@
+{% extends "ferme/base.html" %}
+
+{% block title %}
+Carte des parcelles
+{% endblock %}
+
+{% block content %}
+
+<h1>🗺️ Carte des parcelles</h1>
+
+<div id="map" style="height: 500px;"></div>
+
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+var map = L.map('map').setView([14.6937, -17.4441], 7);
+
+L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+        attribution: '&copy; OpenStreetMap contributors'
+    }
+).addTo(map);
+
+{% for p in parcelles %}
+
+L.marker([
+    {{ p.latitude }},
+    {{ p.longitude }}
+]).addTo(map)
+.bindPopup(
+    "<b>{{ p.nom }}</b><br>" +
+    "Culture : {{ p.culture.nom }}<br>" +
+    "Superficie : {{ p.superficie }} ha"
+);
+
+{% endfor %}
+
+</script>
+
+{% endblock %}

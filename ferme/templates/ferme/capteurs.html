@@ -1,0 +1,41 @@
+{% extends "ferme/base.html" %}
+
+{% block title %}
+Capteurs IoT
+{% endblock %}
+
+{% block content %}
+
+<h1>📡 Capteurs IoT</h1>
+
+<table class="table table-bordered table-striped">
+
+    <thead class="table-success">
+        <tr>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Valeur</th>
+            <th>Parcelle</th>
+            <th>IA</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for r in recommandations %}
+
+    <tr>
+        <td>{{ r.capteur.nom }}</td>
+        <td>{{ r.capteur.get_type_capteur_display }}</td>
+        <td>{{ r.capteur.valeur }}</td>
+        <td>{{ r.capteur.parcelle.nom }}</td>
+        <td>{{ r.conseil }}</td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

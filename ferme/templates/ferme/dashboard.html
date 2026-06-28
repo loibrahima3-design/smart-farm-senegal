@@ -1,0 +1,119 @@
+{% extends "ferme/base.html" %}
+
+{% block title %}
+Tableau de bord
+{% endblock %}
+
+{% block content %}
+
+<h1>📊 Tableau de bord</h1>
+<div class="card mb-4 border-primary">
+    <div class="card-body">
+
+        <h4>🌦️ Météo actuelle - Dakar</h4>
+
+        <p>
+            🌡️ <strong>Température :</strong>
+            {{ meteo.temperature }} °C
+        </p>
+
+        <p>
+            💨 <strong>Vitesse du vent :</strong>
+            {{ meteo.vent }} km/h
+        </p>
+
+    </div>
+</div>
+
+<div class="row mt-4">
+
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h2>{{ nb_cultures }}</h2>
+                <p>🌾 Cultures</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h2>{{ nb_parcelles }}</h2>
+                <p>🚜 Parcelles</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h2>{{ surface_totale }}</h2>
+                <p>📏 Hectares cultivés</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr class="my-5">
+
+<h2>📈 Superficie des parcelles</h2>
+
+<canvas id="graphique"></canvas>
+
+<hr class="my-5">
+
+<h2>🤖 Recommandations intelligentes (IA v2)</h2>
+
+{% for r in recommandations %}
+
+<div class="card mb-3">
+
+    <div class="card-header bg-success text-white">
+        🌾 {{ r.nom }}
+    </div>
+
+    <div class="card-body">
+
+        <ul>
+
+        {% for conseil in r.conseils %}
+
+            <li>{{ conseil }}</li>
+
+        {% endfor %}
+
+        </ul>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const ctx = document.getElementById('graphique');
+
+new Chart(ctx, {
+
+    type: 'bar',
+
+    data: {
+
+        labels: {{ noms|safe }},
+
+        datasets: [{
+            label: 'Superficie (ha)',
+            data: {{ superficies|safe }}
+        }]
+    }
+
+});
+
+</script>
+
+{% endblock %}

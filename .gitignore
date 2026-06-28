@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Base de données
+db.sqlite3
+
+# Environnement virtuel
+venv/
+.env
+
+# Fichiers statiques générés
+staticfiles/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log

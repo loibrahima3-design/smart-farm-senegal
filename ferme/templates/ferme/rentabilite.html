@@ -1,0 +1,43 @@
+{% extends "ferme/base.html" %}
+
+{% block title %}
+Rentabilité
+{% endblock %}
+
+{% block content %}
+
+<h1>💰 Analyse de rentabilité</h1>
+
+<table class="table table-striped table-bordered mt-4">
+
+    <thead class="table-success">
+        <tr>
+            <th>Parcelle</th>
+            <th>Coût eau (FCFA)</th>
+            <th>Coût engrais (FCFA)</th>
+            <th>Main d'œuvre (FCFA)</th>
+            <th>Revenu estimé (FCFA)</th>
+            <th>Bénéfice (FCFA)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for d in donnees %}
+
+    <tr>
+        <td>{{ d.nom }}</td>
+        <td>{{ d.cout_eau|floatformat:0 }}</td>
+        <td>{{ d.cout_engrais|floatformat:0 }}</td>
+        <td>{{ d.cout_main_oeuvre|floatformat:0 }}</td>
+        <td>{{ d.revenu|floatformat:0 }}</td>
+        <td><strong>{{ d.benefice|floatformat:0 }}</strong></td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

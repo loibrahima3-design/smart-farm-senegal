@@ -1,0 +1,76 @@
+{% extends "ferme/base.html" %}
+
+{% block title %}
+Prédiction IA
+{% endblock %}
+
+{% block content %}
+
+<h1>🤖 IA V4 - Prédiction du rendement</h1>
+
+<form method="post" class="mt-4">
+
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label>Superficie (ha)</label>
+        <input
+            type="number"
+            step="0.1"
+            name="superficie"
+            class="form-control"
+            required>
+    </div>
+
+    <div class="mb-3">
+        <label>Besoin en eau</label>
+        <input
+            type="number"
+            name="eau"
+            class="form-control"
+            required>
+    </div>
+
+    <div class="mb-3">
+        <label>Azote (N)</label>
+        <input
+            type="number"
+            name="azote"
+            class="form-control"
+            required>
+    </div>
+
+    <div class="mb-3">
+        <label>Phosphore (P)</label>
+        <input
+            type="number"
+            name="phosphore"
+            class="form-control"
+            required>
+    </div>
+
+    <div class="mb-3">
+        <label>Potassium (K)</label>
+        <input
+            type="number"
+            name="potassium"
+            class="form-control"
+            required>
+    </div>
+
+    <button class="btn btn-success">
+        🔮 Prédire
+    </button>
+
+</form>
+
+{% if resultat %}
+
+<div class="alert alert-info mt-4">
+    🌾 Rendement estimé :
+    <strong>{{ resultat }} tonnes</strong>
+</div>
+
+{% endif %}
+
+{% endblock %}

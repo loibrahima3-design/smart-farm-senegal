@@ -1,0 +1,49 @@
+{% extends "ferme/base.html" %}
+
+{% block title %}
+Accueil
+{% endblock %}
+
+{% block content %}
+
+<h1>Bienvenue sur Smart Farm Sénégal 🌾</h1>
+
+<p class="lead">
+    Application de gestion intelligente des exploitations agricoles.
+</p>
+
+<hr>
+
+<h2>Nos cultures</h2>
+
+<div class="row">
+
+    {% for culture in cultures %}
+
+    <div class="col-md-4">
+
+        <div class="card mb-3">
+
+            <div class="card-body">
+
+                <h5>{{ culture.nom }}</h5>
+
+                <p>💧 Eau : {{ culture.besoin_eau }}</p>
+
+                <p>🌱 Engrais : {{ culture.besoin_engrais }}</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <p>Aucune culture enregistrée.</p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
